@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { fetchProcessOptions } from '@/api'
+import { fetchProcessOptions, fetchWeeklyData } from '@/api'
 
 export default {
   name: 'IndexPage',
@@ -35,7 +35,7 @@ export default {
     return {
       selected: [],
       options: [],
-      dates: []
+      dates: null
     }
   },
   computed: {
@@ -48,7 +48,16 @@ export default {
   },
   methods: {
     search () {
-
+      if (!this.processCode) {
+        return this.$message({ showClose: true, message: '请选择工序', type: 'error' })
+      }
+      if (!this.dates) {
+        return this.$message({ showClose: true, message: '请选择日期', type: 'error' })
+      }
+      const [startDate, endDate] = this.dates.map(d => d.toLocaleDateString().replace(/\//g, '-'))
+      fetchWeeklyData(this.processCode, startDate, endDate).then(data => {
+        console.log(data)
+      })
     },
     initProcessOptions () {
       fetchProcessOptions().then(data => {
