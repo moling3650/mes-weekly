@@ -1,6 +1,6 @@
 <template>
   <div id="IndexPage">
-    <el-row :gutter="20">
+    <el-row :gutter="20" :style="{ margin: '10px 0'}">
       <el-col :span="5">
         <el-cascader
           expand-trigger="hover"
