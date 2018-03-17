@@ -1,6 +1,6 @@
 <template>
   <div class="z-table">
-    <div class="table-wrap">
+    <div class="table-wrap" :style="{ height: (pageSize + 1) * 36 + 'px'}">
       <el-table v-loading="loading"
         :data="tableData" border stripe size="mini"
         :header-cell-style="{backgroundColor: '#409eff', color: '#fff'}"
@@ -51,9 +51,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.table-wrap {
-  height: 300px;
-}
 .cell {
   margin: 5px 0;
 }
