@@ -23,11 +23,13 @@
         <el-button @click="search">搜索</el-button>
       </el-col>
     </el-row>
+    <z-table :data="weeklyData"></z-table>
   </div>
 </template>
 
 <script>
 import { fetchProcessOptions, fetchWeeklyData } from '@/api'
+import ZTable from '@/components/ZTable'
 
 export default {
   name: 'IndexPage',
@@ -35,8 +37,12 @@ export default {
     return {
       selected: [],
       options: [],
-      dates: null
+      dates: null,
+      weeklyData: []
     }
+  },
+  components: {
+    ZTable
   },
   computed: {
     groupCode () {
@@ -56,7 +62,7 @@ export default {
       }
       const [startDate, endDate] = this.dates.map(d => d.toLocaleDateString().replace(/\//g, '-'))
       fetchWeeklyData(this.processCode, startDate, endDate).then(data => {
-        console.log(data)
+        this.weeklyData = data
       })
     },
     initProcessOptions () {
