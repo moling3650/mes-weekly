@@ -28,7 +28,9 @@
       <el-col :span="12">
         <z-bar title="工序产量图" :data="weeklyData" label="日期" :values="['产量']"/>
       </el-col>
-      <el-col :span="12"></el-col>
+      <el-col :span="12">
+        <z-line title="工序合格率" :data="weeklyData" label="日期" :values="['合格率']"/>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -37,6 +39,7 @@
 import { fetchProcessOptions, fetchWeeklyData } from '@/api'
 import ZTable from '@/components/ZTable'
 import ZBar from '@/components/ZBar'
+import ZLine from '@/components/ZLine'
 
 export default {
   name: 'IndexPage',
@@ -51,7 +54,8 @@ export default {
   },
   components: {
     ZTable,
-    ZBar
+    ZBar,
+    ZLine
   },
   computed: {
     groupCode () {
