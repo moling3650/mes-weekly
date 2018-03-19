@@ -23,13 +23,13 @@
         <el-button @click="search">搜索</el-button>
       </el-col>
     </el-row>
-    <z-table :data="weeklyData" :loading="loading"></z-table>
-    <el-row :gutter="20">
+    <z-table :data="weeklyData" :loading="loading"/>
+    <el-row :gutter="20" v-if="weeklyData.length">
       <el-col :span="12">
-        <z-bar title="工序产量图" :data="weeklyData" label="日期" :values="['产量']"/>
+        <z-bar title="工序产量图" height="350px" :data="weeklyData" label="日期" :values="['产量']"/>
       </el-col>
       <el-col :span="12">
-        <z-line title="工序合格率" :data="weeklyData" label="日期" :values="['合格率']"/>
+        <z-line title="工序合格率" height="350px" :data="weeklyData" label="日期" :values="['合格率']"/>
       </el-col>
     </el-row>
   </div>
@@ -48,7 +48,7 @@ export default {
       loading: false,
       selected: [],
       options: [],
-      dates: null,
+      dates: [new Date(Date.now() - 7 * 24 * 3600 * 1000), new Date(Date.now())],
       weeklyData: []
     }
   },
