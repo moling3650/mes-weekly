@@ -24,12 +24,19 @@
       </el-col>
     </el-row>
     <z-table :data="weeklyData" :loading="loading"></z-table>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <z-bar title="工序产量图" :data="weeklyData" label="日期" :values="['产量']"/>
+      </el-col>
+      <el-col :span="12"></el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import { fetchProcessOptions, fetchWeeklyData } from '@/api'
 import ZTable from '@/components/ZTable'
+import ZBar from '@/components/ZBar'
 
 export default {
   name: 'IndexPage',
@@ -43,7 +50,8 @@ export default {
     }
   },
   components: {
-    ZTable
+    ZTable,
+    ZBar
   },
   computed: {
     groupCode () {
