@@ -75,8 +75,8 @@ export default {
           data: this.data.map(item => item[this.label])
         },
         yAxis: {
-          max: value => value.max + (value.max - value.min) / 4,
-          min: value => value.min - (value.max - value.min) / 4
+          max: 'dataMax',
+          min: 'dataMin'
         },
         series
       }, true)
