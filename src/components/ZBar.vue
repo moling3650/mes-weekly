@@ -70,8 +70,11 @@ export default {
         legend: {},
         xAxis: {
           axisLabel: {
-            interval: 0,
-            rotate: -20
+            rotate: -20,
+            margin: 25,
+            textStyle: {
+              align: 'center'
+            }
           },
           data: this.data.map(item => item[this.label])
         },
