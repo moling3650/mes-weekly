@@ -13,7 +13,7 @@
         <el-table-column v-for="field in fields" :key="field" :prop="field" :label="field" show-overflow-tooltip/>
       </el-table>
     </div>
-    <el-pagination background layout="prev, pager, next" :total="data.length" :page-size="pageSize" :current-page.sync="index"/>
+    <el-pagination v-if="data.length" background layout="prev, pager, next" :total="data.length" :page-size="pageSize" :current-page.sync="index"/>
   </div>
 </template>
 
@@ -28,6 +28,10 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    pageSize: {
+      type: Number,
+      default: 7
     }
   },
   computed: {
@@ -43,8 +47,7 @@ export default {
   },
   data () {
     return {
-      pageSize: 5,
-      index: 0
+      index: 1
     }
   }
 }
