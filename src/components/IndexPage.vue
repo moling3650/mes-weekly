@@ -23,7 +23,7 @@
         <el-button @click="search">搜索</el-button>
       </el-col>
     </el-row>
-    <z-table :data="weeklyData"></z-table>
+    <z-table :data="weeklyData" :loading="loading"></z-table>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   name: 'IndexPage',
   data () {
     return {
+      loading: false,
       selected: [],
       options: [],
       dates: null,
@@ -60,9 +61,11 @@ export default {
       if (!this.dates) {
         return this.$message({ showClose: true, message: '请选择日期', type: 'error' })
       }
+      this.loading = true
       const [startDate, endDate] = this.dates.map(d => d.toLocaleDateString().replace(/\//g, '-'))
       fetchWeeklyData(this.processCode, startDate, endDate).then(data => {
         this.weeklyData = data
+        this.loading = false
       })
     },
     initProcessOptions () {
