@@ -22,6 +22,9 @@
       <el-col :span="3">
         <el-button @click="search">搜索</el-button>
       </el-col>
+      <el-col :span="3">
+        <el-button @click="download">导出数据</el-button>
+      </el-col>
     </el-row>
     <z-table :data="weeklyData" :loading="loading"/>
     <el-row :gutter="20" v-if="weeklyData.length">
@@ -37,6 +40,7 @@
 
 <script>
 import { fetchProcessOptions, fetchWeeklyData } from '@/api'
+import { exportXlsx } from '@/lib/exportData'
 import ZTable from '@/components/ZTable'
 import ZBar from '@/components/ZBar'
 import ZLine from '@/components/ZLine'
@@ -79,6 +83,14 @@ export default {
         this.weeklyData = data
         this.loading = false
       })
+    },
+    download () {
+      if (!this.weeklyData.length) {
+        return
+      }
+      const fields = Object.keys(this.weeklyData[0])
+      const data = [fields, ...this.weeklyData.map(row => Object.values(row))]
+      exportXlsx(data, 'weeklyData')
     },
     initProcessOptions () {
       fetchProcessOptions().then(data => {
